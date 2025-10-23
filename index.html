@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sally Carrillo - Desarrolladora de Software</title>
+    <title>Melany Cevallos - Software Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #c19a6b;
+            --secondary: #d4a574;
+            --dark: #5c4f3d;
+            --light: #f5f0e8;
+            --text: #4a4035;
+            --accent: #b8956a;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text);
+            background: var(--light);
+            overflow-x: hidden;
         }
 
         .container {
@@ -24,13 +37,22 @@
             padding: 0 20px;
         }
 
+        /* Header con efecto glassmorphism */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: fixed;
             top: 0;
-            z-index: 100;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.95);
         }
 
         nav {
@@ -41,186 +63,465 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: #667eea;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transition: width 0.3s;
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section mejorado */
         .hero {
-            padding: 6rem 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            animation: wave 15s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { background-position: 0 0; }
+            100% { background-position: 1440px 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
             text-align: center;
             color: white;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            animation: fadeInUp 0.8s ease;
         }
 
-        .hero p {
-            font-size: 1.3rem;
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero-content .university {
+            font-size: 1.2rem;
+            opacity: 0.9;
             margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s backwards;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1s ease 0.4s backwards;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        section {
-            background: white;
-            margin: 2rem 0;
-            padding: 4rem 0;
-            border-radius: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #667eea;
-        }
-
-        .about-content {
+        .social-links {
             display: flex;
-            gap: 3rem;
-            align-items: center;
-            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-image {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .social-links a {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
             color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
         }
 
+        .social-links a:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.5s backwards;
+        }
+
+        .btn {
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Sections mejoradas */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section mejorado */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .profile-circle {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            color: white;
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+            animation: float 3s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateX(10px);
+        }
+
+        .info-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        /* Skills Section mejorada */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
         .skill-card {
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 10px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .skill-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: #f8f9fa;
-            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
             overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: scaleX(0);
             transition: transform 0.3s;
         }
 
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(193, 154, 107, 0.25);
+        }
+
+        .skill-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .skill-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .skill-card p {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Projects Section mejorada */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+            position: relative;
+        }
+
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(193, 154, 107, 0.25);
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 5rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: ripple 3s linear infinite;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
         }
 
         .project-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .project-content h3 {
+            color: var(--dark);
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #667eea;
         }
 
-        .contact-info {
+        .project-tags {
             display: flex;
-            justify-content: center;
-            gap: 3rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
 
-        .contact-item {
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
         }
 
         .contact-icon {
-            font-size: 2.5rem;
-            color: #667eea;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .contact-card h3 {
+            color: var(--dark);
             margin-bottom: 0.5rem;
         }
 
-        footer {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 2rem;
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
         }
 
+        .contact-card a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.9;
+            margin: 0.5rem 0;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -232,26 +533,35 @@
             }
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-            }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content .subtitle { font-size: 1.2rem; }
+            .nav-links { display: none; }
+            .about-content { grid-template-columns: 1fr; }
+            .profile-circle { width: 250px; height: 250px; font-size: 7rem; }
+            .cta-buttons { flex-direction: column; }
+            .section-title { font-size: 2rem; }
+        }
 
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            z-index: 9999;
+            transition: width 0.1s;
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header id="header">
         <nav class="container">
-            <div class="logo">Sally Carrillo</div>
+            <div class="logo">MC</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#sobre-mi">Sobre Mí</a></li>
@@ -263,72 +573,98 @@
     </header>
 
     <section class="hero" id="inicio">
-        <div class="container">
-            <h1>👋 Hola, soy Sally Carrillo</h1>
-            <p>Estudiante de Ingeniería en Software | UTA | 4to Semestre</p>
-            <a href="#contacto" class="btn">Contáctame</a>
+        <div class="container hero-content">
+            <h1>Melany Cevallos</h1>
+            <p class="subtitle">Desarrolladora de Software en Formación</p>
+            <p class="university">🎓 Universidad Técnica de Ambato | 4to Semestre</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/SalyC15" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:tu-email@estudiantes.uta.edu.ec"><i class="fas fa-envelope"></i></a>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+                <a href="#contacto" class="btn btn-secondary">Contáctame</a>
+            </div>
         </div>
     </section>
 
     <section id="sobre-mi">
         <div class="container">
-            <h2>Sobre Mí</h2>
+            <h2 class="section-title">Sobre Mí</h2>
             <div class="about-content">
-                <div class="about-image">👩‍💻</div>
+                <div class="about-image">
+                    <div class="profile-circle">👩‍💻</div>
+                </div>
                 <div class="about-text">
-                    <h3>¡Encantada de conocerte!</h3>
-                    <p style="margin: 1rem 0;">
-                        Soy estudiante de 4to semestre de Ingeniería en Software en la Universidad Técnica de Ambato. 
-                        Me apasiona el desarrollo de software y estoy constantemente aprendiendo nuevas tecnologías 
-                        para crear soluciones innovadoras.
+                    <h3>¡Hola! Encantada de conocerte 👋</h3>
+                    <p>
+                        Soy Melany Cevallos, estudiante apasionada de Ingeniería en Software en la Universidad 
+                        Técnica de Ambato. Actualmente en mi 4to semestre, me dedico a construir mis habilidades 
+                        en desarrollo de software con un enfoque en crear soluciones innovadoras y eficientes.
                     </p>
-                    <p style="margin: 1rem 0;">
-                        Mi objetivo es convertirme en una desarrolladora full-stack competente y contribuir a proyectos 
-                        que tengan un impacto positivo en la sociedad.
+                    <p>
+                        Mi viaje en el mundo de la programación comenzó con la curiosidad de entender cómo 
+                        funcionan las aplicaciones que usamos diariamente. Ahora, cada línea de código es una 
+                        oportunidad para aprender y crear algo significativo.
                     </p>
-                    <p style="margin: 1rem 0;">
-                        <strong>📍 Ubicación:</strong> Ambato, Ecuador<br>
-                        <strong>🎓 Universidad:</strong> Universidad Técnica de Ambato<br>
-                        <strong>📚 Carrera:</strong> Ingeniería en Software
-                    </p>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span><strong>Ubicación:</strong> Ambato, Ecuador</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span><strong>Universidad:</strong> Universidad Técnica de Ambato</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-code"></i>
+                        <span><strong>Carrera:</strong> Ingeniería en Software</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span><strong>Semestre:</strong> 4to Semestre</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="habilidades" style="background: #f8f9fa;">
+    <section id="habilidades" style="background: white;">
         <div class="container">
-            <h2>Habilidades Técnicas</h2>
+            <h2 class="section-title">Habilidades Técnicas</h2>
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">☕</div>
                     <h3>Java</h3>
-                    <p>Programación orientada a objetos, estructuras de datos</p>
+                    <p>Programación orientada a objetos, estructuras de datos, y desarrollo de aplicaciones robustas.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">🐍</div>
                     <h3>Python</h3>
-                    <p>Desarrollo de scripts, automatización</p>
+                    <p>Scripting, automatización de procesos y desarrollo de algoritmos eficientes.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">🌐</div>
-                    <h3>Web Development</h3>
-                    <p>HTML5, CSS3, JavaScript</p>
+                    <h3>Desarrollo Web</h3>
+                    <p>HTML5, CSS3, JavaScript y creación de interfaces responsivas y modernas.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">🗄️</div>
                     <h3>Bases de Datos</h3>
-                    <p>MySQL, modelado de datos</p>
+                    <p>MySQL, diseño de esquemas relacionales y optimización de consultas.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">📊</div>
-                    <h3>Git & GitHub</h3>
-                    <p>Control de versiones, colaboración</p>
+                    <h3>Control de Versiones</h3>
+                    <p>Git y GitHub para trabajo colaborativo y gestión de código fuente.</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">🚀</div>
                     <h3>En Aprendizaje</h3>
-                    <p>React, Node.js, metodologías ágiles</p>
+                    <p>React, Node.js, metodologías ágiles y arquitectura de software.</p>
                 </div>
             </div>
         </div>
@@ -336,57 +672,84 @@
 
     <section id="proyectos">
         <div class="container">
-            <h2>Proyectos Destacados</h2>
+            <h2 class="section-title">Proyectos Destacados</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">📝</div>
+                    <div class="project-image">📱</div>
                     <div class="project-content">
-                        <h3>Proyecto 1</h3>
-                        <p>Sistema de gestión desarrollado en Java. Implementa conceptos de POO y manejo de bases de datos.</p>
-                        <p style="margin-top: 1rem;"><strong>Tecnologías:</strong> Java, MySQL</p>
+                        <h3>Sistema de Gestión</h3>
+                        <p>Aplicación de escritorio desarrollada en Java que implementa conceptos avanzados de POO y manejo eficiente de bases de datos relacionales.</p>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">POO</span>
+                        </div>
+                        <a href="#" class="project-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">🌐</div>
                     <div class="project-content">
-                        <h3>Proyecto 2</h3>
-                        <p>Sitio web responsivo con funcionalidades dinámicas usando JavaScript vanilla.</p>
-                        <p style="margin-top: 1rem;"><strong>Tecnologías:</strong> HTML, CSS, JavaScript</p>
+                        <h3>Sitio Web Interactivo</h3>
+                        <p>Página web responsiva con funcionalidades dinámicas, diseño moderno y experiencia de usuario optimizada.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <a href="#" class="project-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">🎮</div>
                     <div class="project-content">
-                        <h3>Proyecto 3</h3>
-                        <p>Aplicación de consola en Python para resolver problemas algorítmicos.</p>
-                        <p style="margin-top: 1rem;"><strong>Tecnologías:</strong> Python</p>
+                        <h3>Algoritmos en Python</h3>
+                        <p>Colección de algoritmos y estructuras de datos implementadas en Python, con enfoque en eficiencia y optimización.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Algoritmos</span>
+                            <span class="tag">Data Structures</span>
+                        </div>
+                        <a href="#" class="project-link">Ver proyecto <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-            <p style="text-align: center; margin-top: 2rem; color: #666;">
-                Más proyectos disponibles en mi <a href="https://github.com/SalyC15" style="color: #667eea; text-decoration: none; font-weight: bold;">GitHub</a>
+            <p style="text-align: center; margin-top: 3rem; font-size: 1.1rem;">
+                Explora más proyectos en mi 
+                <a href="https://github.com/SalyC15" style="color: var(--primary); text-decoration: none; font-weight: 600;">
+                    GitHub <i class="fab fa-github"></i>
+                </a>
             </p>
         </div>
     </section>
 
-    <section id="contacto" style="background: #f8f9fa;">
+    <section id="contacto" style="background: white;">
         <div class="container">
-            <h2>¡Conectemos!</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
+            <h2 class="section-title">¡Conectemos!</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: var(--text);">
+                ¿Tienes un proyecto en mente o simplemente quieres charlar sobre tecnología? ¡Hablemos!
+            </p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
                     <h3>Email</h3>
-                    <p>tu-email@estudiantes.uta.edu.ec</p>
+                    <p><a href="mailto:tu-email@estudiantes.uta.edu.ec">tu-email@estudiantes.uta.edu.ec</a></p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
                     <h3>LinkedIn</h3>
-                    <p><a href="#" style="color: #667eea; text-decoration: none;">Tu perfil</a></p>
+                    <p><a href="#" target="_blank">Melany Cevallos</a></p>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">🐙</div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
                     <h3>GitHub</h3>
-                    <p><a href="https://github.com/SalyC15" style="color: #667eea; text-decoration: none;">@SalyC15</a></p>
+                    <p><a href="https://github.com/SalyC15" target="_blank">@SalyC15</a></p>
                 </div>
             </div>
         </div>
@@ -394,9 +757,47 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Sally Carrillo | Estudiante de Ingeniería en Software - UTA</p>
-            <p style="margin-top: 0.5rem; color: #666;">Hecho con 💜 y mucho ☕</p>
+            <p style="font-size: 1.1rem; font-weight: 600;">Melany Cevallos</p>
+            <p>Estudiante de Ingeniería en Software - Universidad Técnica de Ambato</p>
+            <p style="margin-top: 1rem;">© 2025 | Diseñado con 💜 y mucho ☕</p>
+            <div class="social-links" style="margin-top: 1.5rem;">
+                <a href="https://github.com/SalyC15" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:tu-email@estudiantes.uta.edu.ec"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
